@@ -1,0 +1,31 @@
+﻿@using Umbraco.Web.Models
+@inherits Umbraco.Web.Macros.PartialViewMacroPage
+
+@{
+    var quantityPerPage = Model.MacroParameters["quantityPerPage"].ToString();
+    var newsList = Model.MacroParameters["newsList"].ToString();
+    var typeNew = Model.GetParameterValue<bool>
+    ("typeNew");
+    var type = typeNew ? "Primary" : "Secondary";
+    var node = Umbraco.TypedContent(newsList);
+    var selection = node.Descendants("newsItem")
+    .Where(x => x.GetPropertyValue<string>
+        ("category").Equals(type))
+        .OrderByDescending(x => x.CreateDate).Take(int.Parse(quantityPerPage));
+}
+
+<ul style="list-style: none">
+    @foreach (var item in selection)
+    {
+        var category = item.GetPropertyValue<string>("category");
+        var image = item.GetPropertyValue<string>("image");
+        var author = item.GetPropertyValue("author");
+        var mediaItem = Umbraco.TypedMedia(image);
+
+        <a href="@item.Url"><img src="@mediaItem.Url" /></a>
+        <span><em>@category</em></span>
+        <span><a href="@item.Url"><h2>@item.Name</h2></a><em>by @author</em></span>
+        <div>@(Umbraco.Truncate(item.GetPropertyValue<string>("contentText"), 100))<a href="@item.Url">Read More...</a></div>
+        <hr />
+    }
+</ul>

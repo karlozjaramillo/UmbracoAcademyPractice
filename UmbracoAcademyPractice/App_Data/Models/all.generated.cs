@@ -8,8 +8,8 @@ using  Umbraco.Web;
 using  Umbraco.ModelsBuilder;
 using  Umbraco.ModelsBuilder.Umbraco;
 [assembly: PureLiveAssembly]
-[assembly:ModelsBuilderAssembly(PureLive = true, SourceHash = "dd9e9bd11e4768a3")]
-[assembly:System.Reflection.AssemblyVersion("0.0.0.2")]
+[assembly:ModelsBuilderAssembly(PureLive = true, SourceHash = "15ee3dfa0b50b5ad")]
+[assembly:System.Reflection.AssemblyVersion("0.0.0.3")]
 
 
 // FILE: models.generated.cs
@@ -90,6 +90,15 @@ namespace Umbraco.Web.PublishedContentModels
 		{
 			return PublishedContentModelUtility.GetModelPropertyType(GetModelContentType(), selector);
 		}
+
+		///<summary>
+		/// gridLayoutHome
+		///</summary>
+		[ImplementPropertyType("gridLayoutHome")]
+		public Newtonsoft.Json.Linq.JToken GridLayoutHome
+		{
+			get { return this.GetPropertyValue<Newtonsoft.Json.Linq.JToken>("gridLayoutHome"); }
+		}
 	}
 
 	/// <summary>News</summary>
@@ -142,6 +151,51 @@ namespace Umbraco.Web.PublishedContentModels
 		{
 			return PublishedContentModelUtility.GetModelPropertyType(GetModelContentType(), selector);
 		}
+
+		///<summary>
+		/// Author
+		///</summary>
+		[ImplementPropertyType("author")]
+		public string Author
+		{
+			get { return this.GetPropertyValue<string>("author"); }
+		}
+
+		///<summary>
+		/// Category
+		///</summary>
+		[ImplementPropertyType("category")]
+		public string Category
+		{
+			get { return this.GetPropertyValue<string>("category"); }
+		}
+
+		///<summary>
+		/// ContentText
+		///</summary>
+		[ImplementPropertyType("contentText")]
+		public IHtmlString ContentText
+		{
+			get { return this.GetPropertyValue<IHtmlString>("contentText"); }
+		}
+
+		///<summary>
+		/// Image
+		///</summary>
+		[ImplementPropertyType("image")]
+		public IPublishedContent Image
+		{
+			get { return this.GetPropertyValue<IPublishedContent>("image"); }
+		}
+
+		///<summary>
+		/// Title
+		///</summary>
+		[ImplementPropertyType("title")]
+		public string Title
+		{
+			get { return this.GetPropertyValue<string>("title"); }
+		}
 	}
 
 	/// <summary>AboutUs</summary>
@@ -167,6 +221,15 @@ namespace Umbraco.Web.PublishedContentModels
 		public static PublishedPropertyType GetModelPropertyType<TValue>(Expression<Func<AboutUs, TValue>> selector)
 		{
 			return PublishedContentModelUtility.GetModelPropertyType(GetModelContentType(), selector);
+		}
+
+		///<summary>
+		/// gridLayoutAboutUs
+		///</summary>
+		[ImplementPropertyType("gridLayoutAboutUs")]
+		public Newtonsoft.Json.Linq.JToken GridLayoutAboutUs
+		{
+			get { return this.GetPropertyValue<Newtonsoft.Json.Linq.JToken>("gridLayoutAboutUs"); }
 		}
 	}
 
