@@ -1,5 +1,10 @@
 ﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
 @using ContentModels = Umbraco.Web.PublishedContentModels;
 @{
-	Layout = "Layout.cshtml";
+    Layout = "Layout.cshtml";
 }
+
+<section style="margin: 0 100px">
+    <h1>Welcome to News</h1>
+    @Umbraco.RenderMacro("ListNews")
+</section>
