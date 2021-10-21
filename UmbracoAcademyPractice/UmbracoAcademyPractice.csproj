@@ -194,6 +194,7 @@
     <Content Include="Views\AboutUs.cshtml" />
     <Content Include="Views\MacroPartials\News.cshtml" />
     <Content Include="Views\MacroPartials\ListNews.cshtml" />
+    <Content Include="Views\MacroPartials\About.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

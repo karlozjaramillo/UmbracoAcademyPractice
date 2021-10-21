@@ -3,8 +3,7 @@
 @{
     Layout = "Layout.cshtml";
 }
-
 <section style="margin: 0 100px">
-    <h1>Welcome to News</h1>
+    <h1>Welcome to @Model.Content.Name</h1>
     @Umbraco.RenderMacro("ListNews")
 </section>
