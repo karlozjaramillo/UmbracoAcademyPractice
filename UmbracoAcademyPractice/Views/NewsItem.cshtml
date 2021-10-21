@@ -1,5 +1,35 @@
 ﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
-@using ContentModels = Umbraco.Web.PublishedContentModels;
+@*@using ContentModels = Umbraco.Web.PublishedContentModels;*@
 @{
-	Layout = "Layout.cshtml";
+    Layout = "Layout.cshtml";
+
+    var newItem = Model;
+    var image = Model.Content.GetPropertyValue<string>("image");
+    var title = newItem.Content.GetPropertyValue("title");
+    var contentText = newItem.Content.GetPropertyValue("contentText");
+    var author = newItem.Content.GetPropertyValue("author");
+    var category = newItem.Content.GetPropertyValue("category");
+    var mediaItem = Umbraco.TypedMedia(image).Url;
 }
+
+<article class="brick entry format-standard" style="margin: 0 100px">
+    <h1>Welcome to NewsItem</h1>
+    <div class="entry-thumb">
+        <a href="@newItem.Content.Url" class="thumb-link"><img src="@mediaItem"/></a>
+    </div>
+    <div class="entry-text">
+        <div class="entry-header">
+            <h1 class="entry-title">
+                <a href="@newItem.Content.Url" style="color: black">@title</a>
+            </h1>
+            <h5>@category | @Model.Content.CreateDate.ToString("MMMM dd/yyyy")</h5>
+        </div>
+        <div class="entry-excerpt">
+            @contentText
+        </div>
+        <div>
+            <p>Author: @author</p>
+            <a href="/"><img src="~/images/leftArrow.png" alt="Back to Home" width="50px"/></a>
+        </div>
+    </div>
+</article>
