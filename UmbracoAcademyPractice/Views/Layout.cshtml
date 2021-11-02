@@ -145,19 +145,15 @@
 
                     <p>Keep yourself updated. Subscribe to our newsletter.</p>
 
-                    <div class="subscribe-form">
-
-                        <form id="mc-form" class="group" novalidate="true">
-
-                            <input type="email" value="" name="dEmail" class="email" id="mc-email" placeholder="Type &amp; press enter" required="">
-
-                            <input type="submit" name="subscribe">
-
-                            <label for="mc-email" class="subscribe-message"></label>
-
-                        </form>
-
-                    </div>
+                    @using (Html.BeginUmbracoForm("SubscriptionForm", "Subscription", FormMethod.Post))
+                    {
+                        <div class="subscribe-form">
+                            <div class="input-group mb-3" style="display: flex; align-items: baseline;">
+                                <input type="email" name="email" class="form-control email" id="email" placeholder="Register your email" aria-label="Recipient's username" aria-describedby="button-addon2" required="">
+                                <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Register</button>
+                            </div>
+                        </div>
+                    }
 
                 </div> <!-- end subscribe -->
 
