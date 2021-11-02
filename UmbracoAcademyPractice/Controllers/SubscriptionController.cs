@@ -6,11 +6,12 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Umbraco.Web.Mvc;
 using UmbracoAcademyPractice.Models;
 
 namespace UmbracoAcademyPractice.Controllers
 {
-    public class SubscriptionController : Controller
+    public class SubscriptionController : SurfaceController
     {
         private UmbracoAcademyPracticeDBEntities db = new UmbracoAcademyPracticeDBEntities();
 
@@ -122,6 +123,24 @@ namespace UmbracoAcademyPractice.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        [HttpPost]
+        public ActionResult SubscriptionForm([Bind(Include = "email,date,status")] Subscription subscription)
+        {
+            if (!ModelState.IsValid)
+            {
+                return CurrentUmbracoPage();
+            }
+
+            var vDate = DateTime.Now;
+            var vStatus = "active";
+            subscription.date = vDate;
+            subscription.status = vStatus;
+            db.Subscription.Add(subscription);
+            db.SaveChanges();
+
+            return RedirectToCurrentUmbracoPage();
         }
     }
 }
