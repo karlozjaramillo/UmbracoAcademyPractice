@@ -1,0 +1,34 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoViewPage
+@{
+    Layout = "~/Views/Layout.cshtml";
+    var newItem = Model;
+    var image = Model.GetPropertyValue<string>("image");
+    var title = newItem.GetPropertyValue("title");
+    var contentText = newItem.GetPropertyValue("contentText");
+    var author = newItem.GetPropertyValue("author");
+    var category = newItem.GetPropertyValue("category");
+    var mediaItem = Umbraco.TypedMedia(image).Url;
+}
+
+<article class="brick entry format-standard" style="margin: 0 100px">
+    <h1>Welcome to @Model.Name</h1>
+    <div class="entry-thumb">
+        <a href="@newItem.Url" class="thumb-link"><img src="@mediaItem" /></a>
+    </div>
+    <div class="entry-text">
+        <div class="entry-header">
+            <h1 class="entry-title">
+                <a href="@newItem.Url" style="color: black">@title</a>
+            </h1>
+            <h5>@category | @Model.CreateDate.ToString("MMMM dd/yyyy")</h5>
+        </div>
+        <div class="entry-excerpt">
+            @contentText
+        </div>
+        <div>
+            <p>Author: @author</p>
+            <a href="/"><img src="~/images/leftArrow.png" alt="Back to Home" width="50px" /></a>
+        </div>
+    </div>
+</article>
+
