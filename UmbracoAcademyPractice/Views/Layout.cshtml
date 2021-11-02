@@ -1,7 +1,8 @@
 ﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
-@using ContentModels = Umbraco.Web.PublishedContentModels;
 @{
     Layout = null;
+    var site = Model.Content.Site();
+    var selection = site.Children.Where(x => x.IsVisible());
 }
 <!DOCTYPE html>
 <!--[if IE 8 ]><html class="no-js oldie ie8" lang="en"> <![endif]-->
@@ -57,9 +58,11 @@
 
             <nav id="main-nav-wrap">
                 <ul class="main-navigation sf-menu">
-                    <li class="current"><a href="/" title="">Home</a></li>
-                    <li><a href="/news/" title="">News</a></li>
-                    <li><a href="/about-us/" title="">About Us</a></li>
+                    <li class="@Html.Raw(Model.Content.Id == site.Id ? "current" : "")"><a href="@site.Url()" title="">@site.Name</a></li>
+                    @foreach (var item in selection)
+                    {
+                        <li class="@(item.IsAncestorOrSelf(Model.Content) ? "current" : null)"><a href="@item.Url()">@item.Name</a></li>
+                    }
                 </ul>
             </nav> <!-- end main-nav-wrap -->
 
@@ -113,11 +116,11 @@
                     <h4>Site Links</h4>
 
                     <ul>
-                        <li><a href="#">About Us</a></li>
-                        <li><a href="#">Blog</a></li>
-                        <li><a href="#">FAQ</a></li>
-                        <li><a href="#">Terms</a></li>
-                        <li><a href="#">Privacy Policy</a></li>
+                        <li class="@Html.Raw(Model.Content.Id == site.Id ? "current" : "")"><a href="@site.Url()" title="">@site.Name</a></li>
+                        @foreach (var item in selection)
+                        {
+                            <li class="@(item.IsAncestorOrSelf(Model.Content) ? "current" : null)"><a href="@item.Url()">@item.Name</a></li>
+                        }
                     </ul>
 
                 </div> <!-- end site-links -->
